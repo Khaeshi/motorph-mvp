@@ -1,0 +1,5 @@
+UserDao.java:8: import java.sql.PreparedStatement;
+UserDao.java:14: * R-01 evidence: every query here uses a PreparedStatement with bound
+UserDao.java:19: * try-with-resources on Connection/PreparedStatement/ResultSet also
+UserDao.java:32: String sql = "SELECT username, password_hash, role FROM app_user WHERE username = ?";
+UserDao.java:35: PreparedStatement stmt = conn.prepareStatement(sql)) {
