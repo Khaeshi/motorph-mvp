@@ -1,6 +1,8 @@
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\config\SecurityConfig.java
+C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\controller\AuthController.java
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\controller\DashboardController.java
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\dao\UserDao.java
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\model\AppUser.java
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\MotorphMvpApplication.java
 C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\security\CustomUserDetailsService.java
+C:\Users\user\Desktop\OngoingProjects\motorph-mvp\motorph-mvp\src\main\java\com\motorph\security\RateLimitingFilter.java
