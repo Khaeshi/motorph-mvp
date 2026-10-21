@@ -10,3 +10,8 @@ ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
 INSERT INTO app_user (username, password_hash, role)
 VALUES ('emp_user', '$2b$10$0AYWXR3lNOh3RfAyRCIQye/qJbjOKJuZwejkgUKPOt2Si/Ioc6LpS', 'EMPLOYEE')
 ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
+
+   -- R-07 demo: username contains HTML markup to show output encoding.
+   INSERT INTO app_user (username, password_hash, role)
+   VALUES ('xss<b>demo</b>', '$2b$10$0AYWXR3lNOh3RfAyRCIQye/qJbjOKJuZwejkgUKPOt2Si/Ioc6LpS', 'EMPLOYEE')
+   ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);

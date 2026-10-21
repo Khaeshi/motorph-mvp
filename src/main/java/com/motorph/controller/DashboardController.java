@@ -10,6 +10,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+import org.owasp.encoder.Encode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ContentDisposition;
@@ -29,17 +30,15 @@ public class DashboardController {
     public String home() {
         return "MotorPH MVP is running. Go to /login to sign in.";
     }
-
-    @GetMapping("/employee/dashboard")
+    
+    @GetMapping(value = "/employee/dashboard", produces = MediaType.TEXT_HTML_VALUE)
     public String employeeDashboard(Authentication auth) {
-        return "Employee dashboard — hello " + auth.getName()
-                + ". Authorities: " + auth.getAuthorities();
+        return dashboardPage("Employee dashboard", auth);
     }
 
-    @GetMapping("/admin/dashboard")
+    @GetMapping(value = "/admin/dashboard", produces = MediaType.TEXT_HTML_VALUE)
     public String adminDashboard(Authentication auth) {
-        return "Admin dashboard — hello " + auth.getName()
-                + ". Authorities: " + auth.getAuthorities();
+        return dashboardPage("Admin dashboard", auth);
     }
 
     @GetMapping("/employee/payslip")
@@ -77,5 +76,17 @@ public class DashboardController {
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDisposition(ContentDisposition.attachment().filename("payslip.pdf").build());
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
+    }
+
+    /**
+     * @description Static markup only; every dynamic value is HTML-encoded (R-07).
+     */
+    private static String dashboardPage(String heading, Authentication auth) {
+        return "<!DOCTYPE html>"
+                + "<html lang=\"en\"><head><meta charset=\"UTF-8\"><title>" + heading + "</title></head>"
+                + "<body><h1>" + heading + "</h1>"
+                + "<p>Hello " + Encode.forHtml(auth.getName()) + "</p>"
+                + "<p>Authorities: " + Encode.forHtml(auth.getAuthorities().toString()) + "</p>"
+                + "</body></html>";
     }
 }

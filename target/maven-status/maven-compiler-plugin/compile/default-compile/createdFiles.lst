@@ -1,9 +1,11 @@
+com\motorph\config\WebConfig.class
 com\motorph\dao\UserDao.class
 com\motorph\MotorphMvpApplication.class
 com\motorph\controller\AuthController.class
 com\motorph\controller\DashboardController.class
 com\motorph\config\SecurityConfig.class
 com\motorph\controller\AuthController$LoginRequest.class
+com\motorph\interceptor\AuditLogInterceptor.class
 com\motorph\model\AppUser.class
 com\motorph\security\CustomUserDetailsService.class
 com\motorph\security\RateLimitingFilter.class
