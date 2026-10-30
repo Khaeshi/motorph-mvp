@@ -1,9 +1,10 @@
 package com.motorph.config;
 
-import com.motorph.interceptor.AuditLogInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.motorph.interceptor.AuditLogInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -19,6 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(auditLogInterceptor)
                 .addPathPatterns("/**")
                 // EDIT: your login/logout paths (check AuthController mappings)
-                .excludePathPatterns("/api/auth/**", "/auth/**", "/login", "/logout", "/error");
+                .excludePathPatterns("/api/v1/auth/**", "/auth/**", "/login", "/logout", "/error");
     }
 }
