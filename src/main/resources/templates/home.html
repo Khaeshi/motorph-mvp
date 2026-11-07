@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>MotorPH Payroll</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+  <h1>MotorPH Payroll</h1>
+  <p>Signed in as <strong th:text="${username}">user</strong></p>
+  <ul>
+    <li><a th:href="@{/employee/me}">My payslip</a></li>
+    <li th:if="${admin}"><a th:href="@{/admin/employees}">Employee list (admin)</a></li>
+  </ul>
+  <form th:action="@{/logout}" method="post">
+    <button type="submit">Log out</button>
+  </form>
+</body>
+</html>

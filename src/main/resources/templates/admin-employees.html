@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="_csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}">
+  <title>Employee list</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+  <h1>Employee list</h1>
+  <p>
+    <label for="checker">Checker (approver username):</label>
+    <input type="text" id="checker" autocomplete="off">
+  </p>
+  <p id="status" role="status"></p>
+  <table>
+    <tr>
+      <th>ID</th><th>Name</th><th>Job title</th>
+      <th class="num">Basic salary</th><th>New salary</th><th></th>
+    </tr>
+    <tr th:each="e : ${employees}">
+      <td th:text="${e.id()}">10001</td>
+      <td th:text="${e.fullName()}">Name</td>
+      <td th:text="${e.jobTitle()}">Title</td>
+      <td class="num salary-cell" th:text="${e.basicSalary()}">0.00</td>
+      <td><input type="number" class="salary-input" min="1" step="0.01" th:value="${e.basicSalary()}"></td>
+      <td><button type="button" class="salary-btn" th:attr="data-id=${e.id()}">Update</button></td>
+    </tr>
+  </table>
+  <p><a th:href="@{/home}">Back</a></p>
+  <script th:src="@{/js/salary.js}"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 52rem; padding: 0 1rem; color: #222; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; }
+td.num, th.num { text-align: right; }
+input[type="number"], input[type="text"] { padding: .3rem; }
+button { padding: .35rem .8rem; cursor: pointer; }
+#status.ok { color: #0a6b2d; }
+#status.err { color: #a32020; }

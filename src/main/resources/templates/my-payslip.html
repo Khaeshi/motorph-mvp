@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My payslip</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+  <h1>My payslip</h1>
+  <p>
+    <span th:text="${slip.employee().id()}">10001</span> -
+    <span th:text="${slip.employee().fullName()}">Name</span>,
+    <span th:text="${slip.employee().jobTitle()}">Title</span>
+    (<span th:text="${slip.generatedOn()}">date</span>)
+  </p>
+  <table>
+    <tr><th>Item</th><th class="num">Amount (PHP)</th></tr>
+    <tr><td>Basic salary</td><td class="num" th:text="${#numbers.formatDecimal(slip.employee().basicSalary(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>Allowance</td><td class="num" th:text="${#numbers.formatDecimal(slip.employee().allowance(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>Gross pay</td><td class="num" th:text="${#numbers.formatDecimal(slip.gross(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>SSS</td><td class="num" th:text="${#numbers.formatDecimal(slip.sss(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>PhilHealth</td><td class="num" th:text="${#numbers.formatDecimal(slip.philhealth(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>Pag-IBIG</td><td class="num" th:text="${#numbers.formatDecimal(slip.pagibig(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><td>Withholding tax</td><td class="num" th:text="${#numbers.formatDecimal(slip.tax(), 1, 'COMMA', 2, 'POINT')}">0</td></tr>
+    <tr><th>Net pay</th><th class="num" th:text="${#numbers.formatDecimal(slip.net(), 1, 'COMMA', 2, 'POINT')}">0</th></tr>
+  </table>
+  <p>
+    <a th:href="@{/employee/me/payslip.pdf}">Download PDF</a> |
+    <a th:href="@{/home}">Back</a>
+  </p>
+</body>
+</html>

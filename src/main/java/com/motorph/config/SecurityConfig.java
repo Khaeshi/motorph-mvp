@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import com.motorph.security.AuditSecurityHandlers;
 import com.motorph.security.RateLimitingFilter;
 
 @Configuration
@@ -43,8 +43,14 @@ public class SecurityConfig {
                 .requestMatchers("/employee/**").hasAnyRole("ADMIN", "EMPLOYEE")
                 .anyRequest().authenticated()
             )
-            .formLogin(form -> form.permitAll())
-            .logout(logout -> logout.permitAll())
+            .exceptionHandling(ex -> ex.accessDeniedHandler(new AuditSecurityHandlers.AccessDenied()))
+            .formLogin(form -> form
+                .successHandler(new AuditSecurityHandlers.LoginSuccess())
+                .failureHandler(new AuditSecurityHandlers.LoginFailure())
+                .permitAll())
+            .logout(logout -> logout
+                .addLogoutHandler(new AuditSecurityHandlers.Logout())
+                .permitAll())
             .sessionManagement(session -> session
                 .sessionFixation(fixation -> fixation.migrateSession())
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
